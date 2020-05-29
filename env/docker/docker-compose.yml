@@ -1,0 +1,21 @@
+version: "3.1" 
+
+services:
+  consul1: 
+    image: consul
+    restart: always
+    hostname: consul1
+    ports:
+      - 8500:8500
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+
+  mysql1: 
+    build: ./
+    image: init_mysql
+    restart: always
+    hostname: mysql1
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456

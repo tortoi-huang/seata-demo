@@ -1,0 +1,6 @@
+rootProject.name = 'seata-demo'
+
+include 'client'
+include 'svr-account'
+include 'svr-stock'
+
