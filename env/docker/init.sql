@@ -1,5 +1,6 @@
 CREATE DATABASE account;
 CREATE DATABASE stock;
+CREATE DATABASE score;
 
 use account;
 
@@ -19,8 +20,21 @@ create table stock
 (
     id bigint not null auto_increment comment '主键自增',
     stock bigint default 0 not null comment '库存数量',
-    constraint n_account_pk
+    constraint n_stock_pk
         primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 insert into stock(id,stock) values (1,20000);
+
+
+use score;
+
+create table score
+(
+    id bigint not null auto_increment comment '主键自增',
+    score bigint default 0 not null comment '积分数量',
+    constraint n_score_pk
+        primary key (id)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
+
+insert into score(id,score) values (1,300000);

@@ -24,7 +24,7 @@ public class ClientApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		System.out.println("----------------------------------");
+		/*System.out.println("----------------------------------");
 		final List<ServiceInstance> instances = discoveryClient.getInstances("service-producer");
 		System.out.println(instances);
 		final ServiceInstance instance = instances.get(0);
@@ -37,6 +37,6 @@ public class ClientApplicationTests {
 		final String config2 = restTemplate.getForObject(url + "/cfg_name", String.class);
 		System.out.println("loadBalancer:" + config2);
 		System.out.println(url);
-		System.out.println("----------------------------------");
+		System.out.println("----------------------------------");*/
 	}
 }

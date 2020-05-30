@@ -1,0 +1,13 @@
+debug: true
+server:
+  port: 19001
+spring:
+  application:
+    name: seata-client
+  cloud:
+    consul:
+      discovery:
+        register: false
+      enabled: true
+      host: localhost
+      port: 8500
