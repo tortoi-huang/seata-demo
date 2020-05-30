@@ -13,7 +13,7 @@ public class OrderServiceImplTest {
     private OrderService orderService;
 
     //@Test
-    public void update() {
+    void update() {
         try {
             orderService.update(9, 123456);
         } catch (Exception e) {
