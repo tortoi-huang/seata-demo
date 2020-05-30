@@ -1,6 +1,6 @@
 debug: true
 server:
-  port: 9000
+  port: 9003
 spring:
   application:
     name: svr-stock

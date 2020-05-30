@@ -1,11 +1,11 @@
-package org.huang.seata.client;
+package org.huang.seata.account.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class ClientConfig {
+public class AccountConfig {
 
     @Bean
     public RestTemplate restTemplate() {

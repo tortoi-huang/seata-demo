@@ -3,17 +3,14 @@ package org.huang.seata.score.service.impl;
 import org.huang.seata.score.dao.ScoreDao;
 import org.huang.seata.score.entity.Score;
 import org.huang.seata.score.service.ScoreService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ScoreServiceImplTest {
 
@@ -26,8 +23,8 @@ public class ScoreServiceImplTest {
     private JdbcTemplate jdbcTemplate;
 
     @Test
-    public void updateScoreById() {
-        final long id = 3L;
+    public void updateScoreById1() {
+        final long id = 1L;
         final long score1 = 1000L;
 
         jdbcTemplate.update("replace into score(id,score) values (?,?);", id, score1);
@@ -41,8 +38,16 @@ public class ScoreServiceImplTest {
             e.printStackTrace();
             fail();
         }
+    }
 
-        final long score3 = -1002L;
+    @Test
+    public void updateScoreById2() {
+        final long id = 3L;
+        final long score1 = 1000L;
+
+        jdbcTemplate.update("replace into score(id,score) values (?,?);", id, score1);
+
+        final long score3 = 1002L;
         boolean runtime = false;
         try {
             scoreService.updateScoreById(id, score3);
@@ -54,12 +59,21 @@ public class ScoreServiceImplTest {
         }
         Score byId2 = scoreDao.findById(id);
         //这里回滚了，值没有变
-        assertEquals(score2, byId2.getScore().longValue());
+        assertEquals(score1, byId2.getScore().longValue());
         assertTrue(runtime);
+    }
 
+    @Test
+    public void updateScoreById() {
+        final long id = 4L;
+        final long score1 = 1000L;
+
+        jdbcTemplate.update("replace into score(id,score) values (?,?);", id, score1);
+
+        final long score3 = 1002L;
         boolean exception = false;
         try {
-            scoreService.updateScoreById(id, 0);
+            scoreService.updateScoreById(id, score3);
         } catch (RuntimeException e) {
             fail();
         } catch (Exception e) {
@@ -68,7 +82,7 @@ public class ScoreServiceImplTest {
         }
         Score byId3 = scoreDao.findById(id);
         //这里没有回滚，值变了
-        assertEquals(0, byId3.getScore().longValue());
+        assertEquals(score3, byId3.getScore().longValue());
         assertTrue(exception);
     }
 }

@@ -1,29 +1,24 @@
 package org.huang.seata.client;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ClientApplicationTests {
-	@Autowired
-	private LoadBalancerClient loadBalancer;
-	@Autowired
-	private DiscoveryClient discoveryClient;
-	@Autowired
-	private RestTemplate restTemplate;
+    @Autowired
+    private LoadBalancerClient loadBalancer;
+    @Autowired
+    private DiscoveryClient discoveryClient;
+    @Autowired
+    private RestTemplate restTemplate;
 
-	@Test
-	public void contextLoads() {
+    @Test
+    void contextLoads() {
 		/*System.out.println("----------------------------------");
 		final List<ServiceInstance> instances = discoveryClient.getInstances("service-producer");
 		System.out.println(instances);
@@ -38,5 +33,5 @@ public class ClientApplicationTests {
 		System.out.println("loadBalancer:" + config2);
 		System.out.println(url);
 		System.out.println("----------------------------------");*/
-	}
+    }
 }

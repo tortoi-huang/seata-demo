@@ -12,11 +12,11 @@ public class StockDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int updateStockById(long id,long stock) {
-        return jdbcTemplate.update("update stock set stock=? where id=?",stock,id);
+    public int updateStockById(long id, long stock) {
+        return jdbcTemplate.update("update stock set stock=? where id=?", stock, id);
     }
 
     public Stock findById(long id) {
-        return jdbcTemplate.queryForObject("select * from stock where id=?",new Object[]{id},(r,n) -> new Stock(r.getLong("id"),r.getLong("stock")));
+        return jdbcTemplate.queryForObject("select * from stock where id=?", new Object[]{id}, (r, n) -> new Stock(r.getLong("id"), r.getLong("stock")));
     }
 }

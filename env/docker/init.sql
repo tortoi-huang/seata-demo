@@ -13,6 +13,7 @@ create table account
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 insert into account(id,account) values (1,1000);
+insert into account(id,account) values (9,1000);
 
 use stock;
 
@@ -25,6 +26,7 @@ create table stock
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 insert into stock(id,stock) values (1,20000);
+insert into stock(id,stock) values (9,20000);
 
 
 use score;
@@ -38,3 +40,4 @@ create table score
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
 insert into score(id,score) values (1,300000);
+insert into score(id,score) values (9,300000);

@@ -3,17 +3,14 @@ package org.huang.seata.stock.service.impl;
 import org.huang.seata.stock.dao.StockDao;
 import org.huang.seata.stock.entity.Stock;
 import org.huang.seata.stock.service.StockService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 public class StockServiceImplTest {
 
@@ -26,8 +23,8 @@ public class StockServiceImplTest {
     private JdbcTemplate jdbcTemplate;
 
     @Test
-    public void updateStockById() {
-        final long id = 3L;
+    public void updateStockById1() {
+        final long id = 1L;
         final long stock1 = 1000L;
 
         jdbcTemplate.update("replace into stock(id,stock) values (?,?);", id, stock1);
@@ -41,8 +38,15 @@ public class StockServiceImplTest {
             e.printStackTrace();
             fail();
         }
+    }
 
-        final long stock3 = -1002L;
+    @Test
+    public void updateStockById2() {
+        final long id = 5L;
+        final long stock1 = 1000L;
+
+        jdbcTemplate.update("replace into stock(id,stock) values (?,?);", id, stock1);
+        final long stock3 = 1002L;
         boolean runtime = false;
         try {
             stockService.updateStockById(id, stock3);
@@ -54,12 +58,21 @@ public class StockServiceImplTest {
         }
         Stock byId2 = stockDao.findById(id);
         //这里回滚了，值没有变
-        assertEquals(stock2, byId2.getStock().longValue());
+        assertEquals(stock1, byId2.getStock().longValue());
         assertTrue(runtime);
+    }
 
+    @Test
+    public void updateStockById3() {
+        final long id = 6L;
+        final long stock1 = 1000L;
+
+        jdbcTemplate.update("replace into stock(id,stock) values (?,?);", id, stock1);
+
+        final long stock3 = 1002L;
         boolean exception = false;
         try {
-            stockService.updateStockById(id, 0);
+            stockService.updateStockById(id, stock3);
         } catch (RuntimeException e) {
             fail();
         } catch (Exception e) {
@@ -68,7 +81,7 @@ public class StockServiceImplTest {
         }
         Stock byId3 = stockDao.findById(id);
         //这里没有回滚，值变了
-        assertEquals(0, byId3.getStock().longValue());
+        assertEquals(stock3, byId3.getStock().longValue());
         assertTrue(exception);
     }
 }

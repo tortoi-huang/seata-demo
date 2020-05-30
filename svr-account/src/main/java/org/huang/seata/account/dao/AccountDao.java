@@ -12,11 +12,11 @@ public class AccountDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int updateAccountById(long id,long account) {
-        return jdbcTemplate.update("update account set account=? where id=?",account,id);
+    public int updateAccountById(long id, long account) {
+        return jdbcTemplate.update("update account set account=? where id=?", account, id);
     }
 
     public Account findById(long id) {
-        return jdbcTemplate.queryForObject("select * from account where id=?",new Object[]{id},(r,n) -> new Account(r.getLong("id"),r.getLong("account")));
+        return jdbcTemplate.queryForObject("select * from account where id=?", new Object[]{id}, (r, n) -> new Account(r.getLong("id"), r.getLong("account")));
     }
 }
