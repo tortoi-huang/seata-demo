@@ -1,35 +1,35 @@
 package org.huang.seata.account.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.huang.seata.account.api.AccountModel;
+import org.huang.seata.account.service.Account2Service;
 import org.huang.seata.account.service.AccountService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 public class AccountController {
     private final AccountService accountService;
+    private final Account2Service account2Service;
 
-    public AccountController(AccountService accountService) {
+    public AccountController(AccountService accountService, Account2Service account2Service) {
         this.accountService = accountService;
+        this.account2Service = account2Service;
     }
 
     @PutMapping("/updateAccountById/{id}")
-    public ResponseEntity<Integer> updateAccountById(@PathVariable long id, @RequestParam("account") long account) {
+    public Integer updateAccountById(@PathVariable long id, @RequestBody AccountModel account) throws Exception {
         log.info("== request param: id={}, account={}", id, account);
-        try {
-            int count = accountService.updateAccountById(id, account);
-            log.info("== response result: count={}", count);
-            return ResponseEntity.ok(count);
-        } catch (RuntimeException e) {
-            log.error("== runtime:", e);
-            return ResponseEntity.status(500).body(-1);
-        } catch (Exception e) {
-            log.error("== exception:", e);
-            return ResponseEntity.status(500).body(-2);
-        }
+        int count = accountService.updateAccountById(id, account);
+        log.info("== response result: count={}", count);
+        return count;
+    }
+
+    @PutMapping("/updateAccountById2/{id}")
+    public Integer updateAccountById2(@PathVariable long id, @RequestBody AccountModel account) throws Exception {
+        log.info("== updateAccountById2 request param: id={}, account={}", id, account);
+        int count = account2Service.updateAccountById(id, account);
+        log.info("== updateAccountById2 response result: count={}", count);
+        return count;
     }
 }

@@ -21,11 +21,11 @@ public class StockServiceImpl implements StockService {
         log.info("== request param: id={}, account={}", id, stock);
         int i = stockDao.updateStockById(id, stock);
         log.info("== response result: count={}", i);
-        if (id % 10 == 5) {
+        if (stock < 0) {
             log.error("== RuntimeException rollback for id={}", id);
             throw new RuntimeException("异常回滚");
         }
-        if (id % 10 == 6) {
+        if (stock > 100_000_00) {
             log.error("== Exception not rollback for id={}", id);
             throw new Exception("异常不回滚");
         }

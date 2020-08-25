@@ -4,4 +4,7 @@ include 'client'
 include 'svr-account'
 include 'svr-stock'
 include 'svr-score'
+include 'svr-account-api'
+include 'svr-stock-api'
+include 'svr-score-api'
 

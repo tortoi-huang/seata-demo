@@ -19,18 +19,10 @@ public class ScoreController {
     }
 
     @PutMapping("/updateScoreById/{id}")
-    public ResponseEntity<Integer> updateScoreById(@PathVariable long id, @RequestParam("score") long score) {
-        log.info("== request param: id={}, account={}", id, score);
-        try {
-            int count = scoreService.updateScoreById(id, score);
-            log.info("== response result: count={}", count);
-            return ResponseEntity.ok(count);
-        } catch (RuntimeException e) {
-            log.error("== runtime:", e);
-            return ResponseEntity.status(500).body(-1);
-        } catch (Exception e) {
-            log.error("== exception:", e);
-            return ResponseEntity.status(500).body(-2);
-        }
+    public Integer updateScoreById(@PathVariable long id, @RequestParam("score") long score) throws Exception {
+        log.info("== updateScoreById request param: id={}, account={}", id, score);
+        int count = scoreService.updateScoreById(id, score);
+        log.info("== updateScoreById response result: count={}", count);
+        return count;
     }
 }

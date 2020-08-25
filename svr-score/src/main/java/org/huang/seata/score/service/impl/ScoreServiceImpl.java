@@ -21,11 +21,11 @@ public class ScoreServiceImpl implements ScoreService {
         log.info("== request param: id={}, account={}", id, score);
         int i = scoreDao.updateScoreById(id, score);
         log.info("== response result: count={}", i);
-        if (id % 10 == 3) {
+        if (score < 0) {
             log.error("== RuntimeException rollback for id={}", id);
             throw new RuntimeException("异常回滚");
         }
-        if (id % 10 == 4) {
+        if (score > 10_000_000) {
             log.error("== Exception not rollback for id={}", id);
             throw new Exception("异常不回滚");
         }
